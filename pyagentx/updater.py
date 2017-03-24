@@ -23,7 +23,7 @@ class Updater(threading.Thread):
         self.stop = threading.Event()
         self._queue = queue
         self._oid = oid
-        self._freq = freq
+        self._freq = 1
         self._data = {}
 
     def run(self):
@@ -31,7 +31,7 @@ class Updater(threading.Thread):
         while True:
             if self.stop.is_set(): break
             now = time.time()
-            if now - start_time > self._freq:
+            if now - start_time > 1:
                 logger.info('Updating : %s (%s)' % (self.__class__.__name__, self._oid))
                 start_time = now
                 self._data = {}
